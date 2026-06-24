@@ -1,0 +1,16 @@
+flask
+flask-login
+flask-mail
+flask-session
+flask-sqlalchemy
+sqlalchemy
+requests
+wikipedia
+feedparser
+sympy
+numpy
+opencv-python
+beautifulsoup4
+langdetect
+word2number
+

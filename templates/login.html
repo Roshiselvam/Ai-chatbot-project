@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;  /* Horizontal center */
+            align-items: center;      /* Vertical center */
+            height: 100vh;            /* Full viewport height */
+            margin: 0;
+
+            /* background image */
+            background: url("{{ url_for('static', filename='log.png.jpg') }}") no-repeat center center fixed;
+            background-size: cover;   /* full screen cover */
+            font-family: Arial, sans-serif;
+        }
+
+        .login-box {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);  /* Transparent box */
+            padding: 80px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            backdrop-filter: blur(8px); /* Glass effect */
+        }
+
+        h1 {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        input {
+            display: block;
+            margin: 10px auto;
+            width: 85%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        #name, #pass {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        button {
+            width: 90%;
+            padding: 12px;
+            border: none;
+            background: linear-gradient(45deg, #00c6ff, #0072ff,#000000);
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+        }
+
+        p {
+            margin-top: 15px;
+            color: #ffffff;
+        }
+
+        p a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+            color: #1efff4;
+        }
+
+        /* Flash messages (Flask) */
+        .flashes {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+
+        .flashes li {
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+       /* Mobile override */
+@media only screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+        background: url("/static/moblog.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .chat-container {
+        max-width: 100%;
+        width: 100%;
+        height: 100vh;   /* Full mobile screen */
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .chat-box {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    .input-container {
+        display: flex;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        align-items: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/login">
+            <input type="text" id="name" name="email" placeholder="Email" required>
+            <input type="password" id="pass" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>New user? <a href="{{ url_for('register') }}">Register</a></p>
+    </div>
+</body>
+</html>
