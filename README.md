@@ -8,14 +8,14 @@ AI-powered chatbot developed using Python and Flask featuring voice input via mi
 - Interactive Flask Web Interface
 - Real-time Response Generation
 
- ## Technologies Used
+## Technologies Used
 - Python
 - Flask
 - HTML
-- CSS
 - JavaScript
-- GPT4All
+- SQLite / SQLAlchemy
 - REST APIs
+- Speech Recognition
 
 ## Author
 Roshini Selvam
